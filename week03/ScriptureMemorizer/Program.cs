@@ -6,11 +6,30 @@ class Program
 {
     static void Main(string[] args)
     {
-        // Create a reference and scripture
-        Reference reference = new Reference("John", 3, 16);
-        string text = "For God so loved the world that he gave his only begotten Son, " +
-                      "that whosoever believeth in him should not perish, but have everlasting life.";
-        Scripture scripture = new Scripture(reference, text);
+        // Load a library of scriptures
+        List<Scripture> scriptureLibrary = new List<Scripture>
+        {
+            new Scripture(new Reference("John", 3, 16),
+                "For God so loved the world that he gave his only begotten Son, " +
+                "that whosoever believeth in him should not perish, but have everlasting life."),
+            
+            new Scripture(new Reference("Proverbs", 3, 5, 6),
+                "Trust in the Lord with all thine heart; and lean not unto thine own understanding. " +
+                "In all thy ways acknowledge him, and he shall direct thy paths."),
+            
+            new Scripture(new Reference("2 Nephi", 2, 25),
+                "Adam fell that men might be; and men are, that they might have joy."),
+            
+            new Scripture(new Reference("Mosiah", 2, 17),
+                "When ye are in the service of your fellow beings ye are only in the service of your God."),
+            
+            new Scripture(new Reference("Philippians", 4, 13),
+                "I can do all things through Christ which strengtheneth me.")
+        };
+
+        // Select a random scripture
+        Random random = new Random();
+        Scripture scripture = scriptureLibrary[random.Next(scriptureLibrary.Count)];
 
         // Main loop
         while (!scripture.AllWordsHidden())
@@ -24,7 +43,7 @@ class Program
             if (input == "quit")
                 break;
 
-            scripture.HideRandomWords(3); // You can change this number for difficulty
+            scripture.HideRandomWords(3); // Adjust number for difficulty
         }
 
         // Final display
@@ -135,3 +154,17 @@ class Scripture
         return (int)((double)hidden / total * 100);
     }
 }
+
+
+// Enhancements to Exceed Requirements:
+//
+// 1. Scripture Library with Random Selection:
+//    Instead of using a single hardcoded scripture, this program includes a library of multiple scriptures.
+//    When the program starts, it randomly selects one scripture to display, making the memorization practice more varied.
+//
+// 2. Progress Tracker:
+//    After each step, the program calculates and displays the percentage of words that are hidden.
+//    This gives the user visual feedback and motivation as they memorize the passage.
+//
+// These features go beyond the core requirements and demonstrate creativity in making the program more interactive
+// and useful for users trying to memorize different scriptures.
